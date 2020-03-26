@@ -3,27 +3,27 @@ class Queue {
   // but try not not reference your old code in writing the new style.
   constructor() {
     this.name = name;
-    this.queueMethods = {};
+    this.storage = {};
   }
 
-  enqueue() {
-    var sizeVar = this.size().length;
-    queueMethods[sizeVar] = this.name;
+  enqueue(value) {
+    var sizeVar = Object.keys(this.storage).length;
+    this.storage[sizeVar] = value;
   }
 
   dequeue() {
-    var initialDequedValue = this.queueMethods[0];
-    delete this.queueMethods[0];
-    for (var key in this.queueMethods) {
-      this.queueMethods[key - 1] = this.queueMethods[key];
+    var initialDequedValue = this.storage[0];
+    delete this.storage[0];
+    for (var key in this.storage) {
+      this.storage[key - 1] = this.storage[key];
     }
-    var sizeVar1 = this.size().length;
-    delete this.queueMethods[sizeVar1 - 1];
+    var sizeVar1 = Object.keys(this.storage).length;
+    delete this.storage[sizeVar1 - 1];
     return initialDequedValue;
   }
 
   size() {
-    var result = Object.keys(this.queueMethods);
+    var result = Object.keys(this.storage);
     return result.length;
   }
 

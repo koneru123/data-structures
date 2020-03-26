@@ -9,7 +9,7 @@ var Queue = function() {
 Queue.prototype.enqueue = function(value) {
   var sizeVar = Object.keys(this.storage).length;
   this.storage[sizeVar] = value;
-  console.log(this.storage);
+  //console.log(this.storage);
 };
 
 Queue.prototype.dequeue = function() {
