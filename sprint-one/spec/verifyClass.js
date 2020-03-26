@@ -28,6 +28,7 @@ define(['../../lib/chai/chai.js', '../../lib/underscore/underscore.js'], functio
   return function(constructor) {
     return {followsPattern: function(pattern, options, prototypeOfInstances) {
       var patternIs = function() {
+        console.log('priya'+pattern + ' :: '+arguments);
         return _(arguments).contains(pattern);
       };
 
