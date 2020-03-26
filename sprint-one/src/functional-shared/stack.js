@@ -14,6 +14,7 @@ var Stack = function() {
   // but try not not reference your old code in writing the new style.
   var someInstance = {};
 
+  someInstance.storage = {};
   someInstance.push = stackMethods.push;
   someInstance.pop = stackMethods.pop;
   someInstance.size = stackMethods.size;
@@ -22,22 +23,22 @@ var Stack = function() {
 };
 
 var stackMethods = {};
-var storage = {};
+
 stackMethods.push = function(name) {
   this.name = name;
-  var sizeVar = Object.keys(storage).length;
-  storage[sizeVar] = this.name;
+  var sizeVar = Object.keys(this.storage).length;
+  this.storage[sizeVar] = this.name;
 };
 
 stackMethods.pop = function() {
-  var sizeVar1 = Object.keys(storage).length;
-  var value = storage[sizeVar1 - 1];
-  delete storage[sizeVar1 - 1];
+  var sizeVar1 = Object.keys(this.storage).length;
+  var value = this.storage[sizeVar1 - 1];
+  delete this.storage[sizeVar1 - 1];
   return value;
 };
 
 stackMethods.size = function() {
-  var result = Object.keys(storage);
+  var result = Object.keys(this.storage);
   return result.length;
 };
 
@@ -49,10 +50,10 @@ stackMethods.size = function() {
 //stack1.pop();
 //console.log(stack1.size());
 
-// var stack1 = Stack();
-// stack1.push('a');
-// stack1.push('b');
-// stack1.pop();
-// console.log(stack1.size());
+var stack1 = Stack();
+stack1.push('a');
+stack1.push('b');
+stack1.pop();
+console.log(stack1.size());
 
 

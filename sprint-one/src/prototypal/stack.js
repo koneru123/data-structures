@@ -1,34 +1,33 @@
-var Stack = function(name) {
+var Stack = function() {
   // Hey! Rewrite in the new style. Your code will wind up looking very similar,
   // but try not not reference your old code in writing the new style.
-  var someInstance = Object.create(Stack.prototype);
+  var someInstance = Object.create(Stack.stuff);
 
-  someInstance.name = name;
+  //this.name = name;
+  someInstance.storage = {};
 
   return someInstance;
 };
 
-var stackMethods = {};
-//var storage = {};
+Stack.stuff = {};
 
-Stack.prototype.push = function(name) {
-  this.name = name;
+Stack.stuff.push = function(value) {
   var sizeVar = this.size().length;
-  stackMethods[sizeVar] = this.name;
+  this.storage[sizeVar] = value;
 };
 
-Stack.prototype.pop = function() {
+Stack.stuff.pop = function() {
   var sizeVar1 = this.size().length;
-  var value = stackMethods[sizeVar1 - 1];
-  delete stackMethods[sizeVar1 - 1];
+  var value = this.storage[sizeVar1 - 1];
+  delete this.storage[sizeVar1 - 1];
   return value;
 };
 
-Stack.prototype.size = function() {
-  var result = Object.keys(stackMethods);
+Stack.stuff.size = function() {
+  var result = Object.keys(this.storage);
   return result.length;
 };
 
-var stack1 = Stack();
+
 
 
