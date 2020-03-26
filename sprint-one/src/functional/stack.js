@@ -13,9 +13,8 @@ push(string) - Add a string to the top of the stack
 pop() - Remove and return the string on the top of the stack
 size() - Return the number of items on the stack*/
 
-var Stack = function(name) {
+var Stack = function() {
   var someInstance = {};
-  someInstance.name = name;
 
   // Use an object with numeric keys to store values
   var storage = {};

@@ -9,11 +9,10 @@ Don't:
 Use the keyword new or prototype chains
 Example: functional instantiation example  */
 
-var Stack = function(name) {
+var Stack = function() {
   // Hey! Rewrite in the new style. Your code will wind up looking very similar,
   // but try not not reference your old code in writing the new style.
   var someInstance = {};
-  someInstance.name = name;
 
   someInstance.push = stackMethods.push;
   someInstance.pop = stackMethods.pop;
