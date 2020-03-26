@@ -24,6 +24,7 @@ var Stack = function(name) {
   someInstance.push = function(value) {
     var sizeVar = Object.keys(storage).length;
     storage[sizeVar] = value;
+    //return storage;
   };
 
   someInstance.pop = function() {
@@ -41,8 +42,8 @@ var Stack = function(name) {
   return someInstance;
 };
 
-var stack1 = Stack();
-stack1.push('a');
+//var stack1 = Stack();
+//stack1.push('a');
 //stack1.push('koneru');
-stack1.pop(); //a
+//stack1.pop(); //a
 //stack1.size() //1
