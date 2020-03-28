@@ -15,7 +15,7 @@ storage = {5:[2,1], 2:[5]} */
 Graph.prototype.addNode = function(node) {
   var len = Object.keys(this.storage).length;
   if (!this.storage.hasOwnProperty(node)) {
-    this.storage[node] = [node, node];
+    this.storage[node] = [];
   }
   //this.storage[node] = [];
   console.log(this.storage);
@@ -39,21 +39,12 @@ Graph.prototype.contains = function(node) {
 // Removes a node from the graph.
 // Time complexity: linear time operation
 Graph.prototype.removeNode = function(node) {
-  //if (this.storage.hasOwnProperty(node)) {
-  delete this.storage[node];
-  //this.storage.removeEdge(node)
-  //if (this.storage.contains(node)) {
-  for (var key in this.storage) {
-    for (var i = 0; i < this.storage[key].length; i++) {
-      if (this.storage.hasEdge(node, this.storage[key][i])) {
-        this.storage.removeEdge(node, this.storage[key][i]);
-      }
-    }
+  var arr1 = this.storage[node];
+  for (var i = 0; i < arr1.length; i++) {
+    this.removeEdge(node, arr1[i]);
   }
+  delete this.storage[node];
 
-  //}
-
-  //}
 };
 
 // Returns a boolean indicating whether two specified nodes are connected.  Pass in the values contained in each of the two nodes.
@@ -73,24 +64,48 @@ Graph.prototype.hasEdge = function(fromNode, toNode) {
 // Connects two nodes in a graph by adding an edge between them.
 // Time complexity: constant time operation
 Graph.prototype.addEdge = function(fromNode, toNode) {
-  this.storage[fromNode] = [toNode];
-  this.storage[toNode] = [fromNode];
+  this.storage[fromNode].push(toNode);
+  this.storage[toNode].push(fromNode);
 };
 
 // Remove an edge between any two specified (by value) nodes.
 // Time complexity: constant time operation
 Graph.prototype.removeEdge = function(fromNode, toNode) {
-  //var val1 = this.storage[fromNode];
-  //var val2 = this.storage[toNode];
-  delete this.storage[fromNode];
-  delete this.storage[toNode];
-  //this.storage[toNode] = [fromNode];
+  // create an array variable called arr1
+  var arr1 = this.storage[fromNode];
+  // create arr2 variable this.storage[toNode]
+  var arr2 = this.storage[toNode];
+
+  // we assign this.storage[fromNode] to that arr1
+  // we loop through arr1
+  for (var i = 0; i < arr1.length; i++) {
+    // if individual array element is equal to toNode
+    if (arr1[i] === toNode) {
+      // then delete toNode from arr1
+      delete arr1[i];
+    }
+  }
+
+  for (var j = 0; j < arr2.length; j++) {
+    // if individual array element is equal to fromNode
+    if (arr2[j] === fromNode) {
+      // then delete toNode from arr2
+      delete arr2[j];
+    }
+  }
+
+  // we loop through arr2 and check if individual array element is equal to fromNode
+  // if yes, delete fromNode from arr2
 };
+// storage = {4: [2, 5], 5: [3, 4], 2: [], 3: []};
+// storage = {4: [2], 5: [3], 2: [], 3: []};
 
 // Pass in a callback which will be executed on each node of the graph.
 // Time complexity: linear time operation
 Graph.prototype.forEachNode = function(cb) {
-
+  for (let key in this.storage) {
+    cb(this.key);
+  }
 };
 
 /*
@@ -101,6 +116,11 @@ var graph = new Graph();
 graph.addNode(4);
 graph.addNode(5);
 graph.addEdge(5, 4);
-console.log(graph.hasEdge(4, 5));//true
+console.log(graph.hasEdge(4, 5)); // true
 graph.removeNode(5);
-console.log(graph.hasEdge(4, 5));//false
+console.log(graph.hasEdge(4, 5)); // false
+/* graph.addEdge(5, 4);
+console.log(graph.hasEdge(4, 5));//true
+graph.removeEdge(4, 5);
+//graph.removeNode(5);
+console.log(graph.hasEdge(4, 5));//false */
